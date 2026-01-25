@@ -1,5 +1,5 @@
 # Standard
-import random, time, os
+import random, time, os, argparse
 
 # Local
 from ASCII_sprites import ASCII_sprites
@@ -102,14 +102,66 @@ def game(players_choice, opponents_choice):
         print("Goodbye!")
         quit()
 
+def old_school_game(players_choice, opponents_choice):
+    clear_screen()
+    print("3")
+    time.sleep(0.5)
+    print("2")
+    time.sleep(0.5)
+    print("1")
+    time.sleep(0.5)
+    print("Go!")
+    time.sleep(0.5)
+    print(f"Opponent chooses {opponents_choice}.")
+    time.sleep(0.5)
+    print(f"You chose {players_choice}.")
+    if players_choice == "rock" and opponents_choice == "scissors":
+        print("rock beats scissors. You win!")
+    elif players_choice == "rock" and opponents_choice == "paper":
+        print("paper beats rock. You lose.")
+    elif players_choice == "paper" and opponents_choice == "rock":
+        print("paper beats rock. You win!")
+    elif players_choice == "paper" and opponents_choice == "scissors":
+        print("scissors beat paper. You lose.")
+    elif players_choice == "scissors" and opponents_choice == "paper":
+        print("scissors beat paper. You win!")
+    elif players_choice == "scissors" and opponents_choice == "rock":
+        print("rock beats scissors. You lose.")
+    elif players_choice == "rock" and opponents_choice == "rock":
+        print("Same result. Try again.")
+    elif players_choice == "paper" and opponents_choice == "paper":
+        print("Same result. Try again.")
+    elif players_choice == "scissors" and opponents_choice == "scissors":
+        print("Same result. Try again.")
+    play_again = input("Play again? (y = Yes, n = No) ").casefold()
+    if play_again not in ["y", "yes"]:
+        print("Goodbye!")
+        quit()
+
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--old_school",
+        help="Play Rock Paper Scissors with only text and no images.",
+        required=False,
+        action="store_true",
+    )
+    return parser.parse_args()
 
 def main():
+    # Choose symbols
+    args = parse_arguments()
     players_choice = None
     while players_choice is None:
         clear_screen()
         players_choice = player_chooses()
     opponents_choice = opponent_chooses()
-    game(players_choice, opponents_choice)
+
+    # Play the game
+    if args.old_school:
+        old_school_game(players_choice, opponents_choice)
+    else:
+        game(players_choice, opponents_choice)
 
 
 if __name__ == "__main__":
