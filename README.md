@@ -19,5 +19,5 @@ python3 rock_paper_scissors.py
 For those who prefer to play without any visuals, try the old school mode:
 
 ```sh
-python3 rock_paper_scissors_old_school.py
+python3 rock_paper_scissors.py --old_school
 ```
