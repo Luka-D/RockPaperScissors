@@ -1,4 +1,4 @@
-# RockPaperScissor
+# RockPaperScissors
 
 <p align='center'><img src="/RPS_demo.gif" width="75%" height="75%"/></p>
 
